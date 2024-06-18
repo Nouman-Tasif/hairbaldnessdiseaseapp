@@ -50,7 +50,7 @@ class HomeScreenViewModel with ChangeNotifier {
 
 
 
-    if ((label == "Alopecia Areata" || label == "Male Pattern Baldness") && confidence > 90) {
+    if ((label == "Alopecia Areata" || label == "Male Pattern Baldness") && confidence > 70) {
       debugPrint("in dialogue message");
       showDiseasePopup(context, "You have a disease, consult to the doctor.");
     }
