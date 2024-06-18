@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "391095145849",
+    "project_id": "hair-app-disease",
+    "storage_bucket": "hair-app-disease.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391095145849:android:a5eb4e96175dd5ed3c4ba8",
+        "android_client_info": {
+          "package_name": "com.hairdiseasedetectorapp.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXUIUFyySUZ6dNax_-GKAawgr8TXMiZXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
