@@ -12,8 +12,7 @@ class HomeScreenViewModel with ChangeNotifier {
 
   Future<void> pickImageFromGallery(BuildContext context) async {
     final imagePicker = ImagePicker();
-    final XFile? pickedImage =
-    await imagePicker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage == null) return;
     selectedImage = File(pickedImage.path);
@@ -23,8 +22,7 @@ class HomeScreenViewModel with ChangeNotifier {
 
   Future<void> pickImageFromCamera(BuildContext context) async {
     final imagePicker = ImagePicker();
-    final XFile? pickedImage =
-    await imagePicker.pickImage(source: ImageSource.camera);
+    final XFile? pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
 
     if (pickedImage == null) return;
     selectedImage = File(pickedImage.path);
@@ -34,26 +32,36 @@ class HomeScreenViewModel with ChangeNotifier {
 
   Future<void> processImage(BuildContext context, String imagePath) async {
     var recognitions = await Tflite.runModelOnImage(
-        path: imagePath,
-        imageMean: 0.0,
-        imageStd: 255.0,
-        numResults: 2,
-        threshold: 0.2,
-        asynch: true);
-    if (recognitions == null) {
-      debugPrint("---------------${recognitions.toString()}");
+      path: imagePath,
+      imageMean: 0.0,
+      imageStd: 255.0,
+      numResults: 3,  // Ensure this matches the number of categories
+      threshold: 0.2,
+      asynch: true,
+    );
+
+    if (recognitions == null || recognitions.isEmpty) {
+      debugPrint("No recognitions found.");
+      showDiseasePopup(context, "Unable to recognize the image. Please try again with a different image.");
       return;
     }
+
     confidence = (recognitions[0]['confidence'] * 100);
     label = (recognitions[0]['label'].toString());
-    debugPrint("---------------${recognitions.toString()}");
+    debugPrint("Recognitions: ${recognitions.toString()}");
 
-
-
-    if ((label == "Alopecia Areata" || label == "Male Pattern Baldness") && confidence > 70) {
-      debugPrint("in dialogue message");
-      showDiseasePopup(context, "You have a disease, consult to the doctor.");
+    if (confidence > 90) {
+      if (label == "Alopecia Areata" || label == "Male Pattern Baldness") {
+        showDiseasePopup(context, "You have $label. Consult a doctor.");
+      } else if (label == "Hairstyle") {
+        showDiseasePopup(context, "We recommend trying a new hairstyle.");
+      } else {
+        //showDiseasePopup(context, "The model is confident but the label is unrecognized.");
+      }
+    } else {
+      showDiseasePopup(context, "We recommend trying a new hairstyle.");
     }
+
     notifyListeners();
   }
 
@@ -79,14 +87,16 @@ class HomeScreenViewModel with ChangeNotifier {
 
   Future<void> tfliteFunction() async {
     String? res = await Tflite.loadModel(
-        model: "assets/model_unquant.tflite",
-        labels: "assets/labels.txt",
-        numThreads: 1,
-        isAsset: true,
-        useGpuDelegate: false);
+      model: "assets/model_unquant.tflite",
+      labels: "assets/labels.txt",
+      numThreads: 1,
+      isAsset: true,
+      useGpuDelegate: false,
+    );
+    debugPrint("Model loaded: $res");
   }
 
-  gotoLoginScreen(BuildContext context) async {
+  void gotoLoginScreen(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(
       context,
