@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: FutureBuilder<DocumentSnapshot>(
                   future: FirebaseFirestore.instance
                       .collection('users')
-                      .doc(DynamicSize().user!.uid)
+                      .doc(DynamicSize().user?.uid)
                       .get(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               child: viewModel.selectedImage == null
-                  ? const Text('nouman')
+                  ? const Text('')
                   : Image.file(
                 viewModel.selectedImage!,
                 fit: BoxFit.fill,

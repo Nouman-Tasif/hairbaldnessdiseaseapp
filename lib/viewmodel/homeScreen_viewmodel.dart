@@ -50,7 +50,7 @@ class HomeScreenViewModel with ChangeNotifier {
     label = (recognitions[0]['label'].toString());
     debugPrint("Recognitions: ${recognitions.toString()}");
 
-    if (confidence > 90) {
+    if (confidence > 95) {
       if (label == "Alopecia Areata" || label == "Male Pattern Baldness") {
         showDiseasePopup(context, "You have $label. Consult a doctor.");
       } else if (label == "Hairstyle") {
@@ -98,11 +98,6 @@ class HomeScreenViewModel with ChangeNotifier {
 
   void gotoLoginScreen(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LoginScreen(),
-      ),
-    );
+
   }
 }
