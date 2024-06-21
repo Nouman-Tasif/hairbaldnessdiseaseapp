@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hairdisease/screen/skintips_screen.dart';
 import 'package:hairdisease/screen/tutorials_screen.dart';
-
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +22,7 @@ class TabScreen extends StatelessWidget {
             const HomeScreen(),
             const HairTipsScreen(),
             HairDisease(),
-            const TutorialsScreen(), // New tab
+            TutorialsScreen(), // New tab
           ],
           items: [
             PersistentBottomNavBarItem(

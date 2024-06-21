@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hairdisease/screen/tutorials_screen.dart';
 import 'package:provider/provider.dart';
 import '../constants/constatsvalue.dart';
 import '../viewmodel/homeScreen_viewmodel.dart';
@@ -152,12 +153,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             () => viewModel.pickImageFromCamera(context)),
                     _buildCard(Icons.image, 'Gallery', Colors.blueGrey,
                             () => viewModel.pickImageFromGallery(context)),
-                    _buildCard(
-                      Icons.settings_overscan_sharp, 'Scan Image',
-                      Colors.blueGrey, () => {},
-                    ),
+                    // _buildCard(
+                    //   Icons.settings_overscan_sharp, 'Scan Image',
+                    //   Colors.blueGrey, () => {},
+                    // ),
                     _buildCard(Icons.info, 'Info', Colors.blueGrey,
-                            () => debugPrint("Nouman")),
+                            () => Navigator.push(context, MaterialPageRoute(builder: (context) =>TutorialsScreen()))),
                   ],
                 ),
               ),
