@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HairTipsViewModel()),
       ],
       child: const MaterialApp(
+        color:   Color(0xffF1F4FC),
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),

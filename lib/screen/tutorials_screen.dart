@@ -11,6 +11,7 @@ class _TutorialScreenState extends State<TutorialsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF1F4FC),
       appBar: AppBar(
         title: Text('Tutorial'),
       ),

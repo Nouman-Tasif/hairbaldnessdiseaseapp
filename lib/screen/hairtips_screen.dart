@@ -12,6 +12,7 @@ class HairTipsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HairTipsViewModel>(builder: (context, viewmodel, _) {
       return Scaffold(
+        backgroundColor: const Color(0xffF1F4FC),
         appBar: AppBar(
           title: Center(child: Text("Hair Tips")),
         ),

@@ -23,14 +23,18 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF1F4FC),
       appBar: AppBar(
         title: Hero(
           tag: 'heading_$index',
           child: Material(
             color: Colors.transparent,
             child: Text(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              "Disease",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ),
         ),
@@ -38,9 +42,32 @@ class DetailScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Text(
-            details[index]!,
-            style: TextStyle(fontSize: 16, height: 1.5),
+          child: Column(
+            children: [
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    index > 4
+                        ? "assets/images/malepaternbaldness.jpg"
+                        : "assets/images/alopeciaareata.jpg",
+                    fit: BoxFit.cover,
+                    height: 200,
+                    width: double.infinity,
+                  ),
+                ),
+              ),
+              Text(
+                details[index]!,
+                style: TextStyle(
+                    fontSize: 16, height: 1.5, fontWeight: FontWeight.w600),
+              ),
+            ],
           ),
         ),
       ),

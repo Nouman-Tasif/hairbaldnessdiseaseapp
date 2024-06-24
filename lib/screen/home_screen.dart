@@ -7,6 +7,7 @@ import 'package:hairdisease/screen/tutorials_screen.dart';
 import 'package:provider/provider.dart';
 import '../constants/constatsvalue.dart';
 import '../viewmodel/homeScreen_viewmodel.dart';
+import 'hairstylepicturescreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key});
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenViewModel>(builder: (context, viewModel, _) {
       return Scaffold(
+        backgroundColor: const Color(0xffF1F4FC),
         appBar: AppBar(
           backgroundColor: Colors.blue,
           title: const Center(
@@ -153,12 +155,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             () => viewModel.pickImageFromCamera(context)),
                     _buildCard(Icons.image, 'Gallery', Colors.blueGrey,
                             () => viewModel.pickImageFromGallery(context)),
-                    // _buildCard(
-                    //   Icons.settings_overscan_sharp, 'Scan Image',
-                    //   Colors.blueGrey, () => {},
-                    // ),
+                    _buildCard(Icons.info, 'Hair style', Colors.blueGrey,
+                            () => Navigator.push(context, MaterialPageRoute(builder: (context) =>HairStyleScreen()))),
                     _buildCard(Icons.info, 'Info', Colors.blueGrey,
                             () => Navigator.push(context, MaterialPageRoute(builder: (context) =>TutorialsScreen()))),
+
+
+
                   ],
                 ),
               ),

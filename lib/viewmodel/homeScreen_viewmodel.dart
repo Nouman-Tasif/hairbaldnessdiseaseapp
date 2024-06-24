@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
+import 'package:hairdisease/screen/hairstylepicturescreen.dart';
 import 'package:image_picker/image_picker.dart';
 import '../screen/login_screen.dart';
 
@@ -54,12 +55,14 @@ class HomeScreenViewModel with ChangeNotifier {
       if (label == "Alopecia Areata" || label == "Male Pattern Baldness") {
         showDiseasePopup(context, "You have $label. Consult a doctor.");
       } else if (label == "Hairstyle") {
-        showDiseasePopup(context, "We recommend trying a new hairstyle.");
+        showNewHairStylePopUpMessage(context, "We recommend trying a new hairstyle.");
+
       } else {
         //showDiseasePopup(context, "The model is confident but the label is unrecognized.");
       }
     } else {
-      showDiseasePopup(context, "We recommend trying a new hairstyle.");
+      showNewHairStylePopUpMessage(context, "We recommend trying a new hairstyle.");
+
     }
 
     notifyListeners();
@@ -77,6 +80,26 @@ class HomeScreenViewModel with ChangeNotifier {
               child: Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  void showNewHairStylePopUpMessage(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Disease Detection'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>HairStyleScreen()));
+
               },
             ),
           ],
